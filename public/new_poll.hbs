@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>VoterR App</title>
+		<link href="/public/css/main.css" rel="stylesheet" type="text/css">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	</head>
+
+	<body>
+		<div class="fullscreen container">
+			<nav>
+				<p class="welcomeUser"><span class="hideInMobile">You are logged in as </span><span id="display-name"></span></p>
+				<div class="loginCont">
+					<a class="menu" href="/">Home</a>
+					<p> | </p>
+					<a class="menu" href="/logout">Logout</a>
+				</div>
+			</nav>
+			
+			<main class="voting newPoll">
+				<h1>New poll</h1>
+				<br/>
+				<form action="/new_poll" method="post">
+					<label>Title:</label>
+					<input type="text" name="title" />
+					<label>Options seperated by new line (max. 7):</label>
+					<textarea rows="6" cols="50" name="labels"></textarea>
+					<button type="submit" class="btn">Make!</button>
+				</form>
+			</main>
+		</div>
+		<script type="text/javascript" src="/public/js/userController.js"></script>
+		
+	</body>
+
+</html>
