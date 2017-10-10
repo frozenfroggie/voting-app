@@ -1,1 +1,1 @@
-VoteR is a fullstack web application, developed for FCC bootcamp. It's build on Clementine.js boilerplate.
+VoteR is a fullstack web application, developed for FCC bootcamp. It's based on Clementine.js boilerplate.
