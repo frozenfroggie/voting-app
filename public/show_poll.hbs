@@ -42,12 +42,15 @@
   		  <div class="display">
           <form class="votingForm" action="/polls/{{id}}/vote" method="post">
             <select name="label" required>
-              {{#each labelsNames}}
+            {{#each labelsNames}}
               <option value="{{this}}">{{this}}</option>
-              {{/each}}
+            {{/each}}
             </select>
             <input type="submit" value="submit">
           </form>
+        {{#if owner}}
+          <div>Delete</div>
+        {{//if}}
           <div class="chartCont">
             <div id="chart"></div>
           </div>
