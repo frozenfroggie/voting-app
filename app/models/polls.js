@@ -5,7 +5,7 @@ var pollsSchema = new Schema({
   title: String,
   labelsNames: Array,
   labels: Object,
-  id: String
+  owner: String
 });
 
 module.exports = mongoose.model('PoolsModel', pollsSchema);

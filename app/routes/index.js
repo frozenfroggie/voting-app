@@ -47,10 +47,12 @@ module.exports = function (app, passport) {
 			  const labelsNames = req.body.labels.split(/\r?\n/).slice(0,7);
 			  let labels = {};
 			  labelsNames.forEach( labelName => labelName !== "" ? labels[labelName] = 1 : "" );
+			  console.log(req.user);
 			  const polls = new Polls({ 
 			    title: req.body.title,
 			    labelsNames: labelsNames,
-			    labels: labels
+			    labels: labels,
+			    owner: req.user
 			  })
 			  polls.save(function(err, data) {
 			    if(err) {
