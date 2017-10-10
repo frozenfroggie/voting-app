@@ -116,7 +116,7 @@
             }));                                          
             var percent = Math.round(1000 * Object.values(d.data)[0] / total) / 10; 
             tooltip.select('.label').html(Object.keys(d.data)[0]);         
-            tooltip.select('.count').html(Object.values(d.data)[0]);         
+            tooltip.select('.count').html("votes: " + Object.values(d.data)[0]);         
             tooltip.select('.percent').html(percent + '%');
             tooltip.style('display', 'block');
         });                                                          
