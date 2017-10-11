@@ -107,7 +107,7 @@ module.exports = function (app, passport) {
 		
 	app.route('/api')
 		.get(function (req, res) {
-			res.json({ok: "yes!"});
+			res.json(req.user.github);
 		});
 
 	app.route('/auth/github')
