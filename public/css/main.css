@@ -123,6 +123,10 @@ input {
 	height: 1.5em;
 }
 
+input[value="Delete"] {
+	background-color: rgb(191, 7, 7) !important;	
+}
+
 input, textarea {
 	width: 95%;	
 	margin: 5px 5px 30px;
@@ -135,6 +139,10 @@ input[type="submit"]:hover {
 	color: #FFA000;
 }
 
+ input[type="button"]:hover {
+ 	cursor: pointer;
+ }
+ 
 .display {
 	display: flex;
 	align-items: center;

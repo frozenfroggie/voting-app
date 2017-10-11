@@ -10,7 +10,7 @@ module.exports = function (app, passport) {
 			res.redirect('/login');
 		}
 	}
-
+	
 	app.route('/')
 		.get(isLoggedIn, function (req, res) {
 			Polls.find({}, function(err, polls) {
@@ -32,7 +32,7 @@ module.exports = function (app, passport) {
 			    }
 			});
 		});
-
+		
 	app.route('/logout')
 		.get(function (req, res) {
 			req.logout();
@@ -44,9 +44,11 @@ module.exports = function (app, passport) {
 			res.render(path + '/public/new_poll.hbs');
 		})
 		.post(isLoggedIn, function(req, res) {
-			  const labelsNames = req.body.labels.split(/\r?\n/).slice(0,7);
+			  const labelsNames = req.body.labels.split(/\r?\n/)
+												  .slice(0,7)
+												  .filter( (val, idx, arr) => arr.indexOf(val) === idx && val !== "" );
 			  let labels = {};
-			  labelsNames.forEach( labelName => labelName !== "" ? labels[labelName] = 1 : "" );
+			  labelsNames.forEach( labelName => labels[labelName] = 1 );
 			  const polls = new Polls({ 
 			    title: req.body.title,
 			    labelsNames: labelsNames,
@@ -68,10 +70,29 @@ module.exports = function (app, passport) {
 				if(err) {
 					res.status(400).json({responseText: "server- Oops! Something went wrong."});
 				} else {
-					res.render(path + '/public/show_poll.hbs', { owner: poll.owner == req.user.id, logged: req.isAuthenticated(), labels: JSON.stringify(poll.labels), labelsNames: poll.labelsNames, title: poll.title.toUpperCase(), id: req.params.id });
+					var userID = req.user ? req.user.id : "";
+					res.render(path + '/public/show_poll.hbs', { owner: poll.owner == userID, logged: req.isAuthenticated(), labels: JSON.stringify(poll.labels), labelsNames: poll.labelsNames, title: poll.title.toUpperCase(), id: req.params.id });
 				}
 		  });
 		});
+		
+	app.route('/polls/:id/delete')
+		.delete(isLoggedIn, function(req,res) {
+			 Polls.findByIdAndRemove(req.params.id, function(err, data) {
+			    if(err) {
+			      res.status(400).json({responseText: "server- Oops! Something went wrong."});
+			    } else {
+			    	console.log("data deleted: " + data);
+			    	Polls.find({}, function(err, polls) {
+					    if(err) {
+					      res.status(400).json({responseText: "server- Oops! Something went wrong."});
+					    } else {
+						  res.status(200).json({responseText: "OK!"});
+					    }
+				    });
+			  }
+		});
+	});
 	
 	app.route('/polls/:id/vote')
 		.post(function(req,res){
@@ -84,7 +105,7 @@ module.exports = function (app, passport) {
 			  });
 		});
 		
-	app.route('/api/:id')
+	app.route('/api')
 		.get(isLoggedIn, function (req, res) {
 			res.json(req.user.github);
 		});

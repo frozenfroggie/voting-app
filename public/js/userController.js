@@ -1,21 +1,23 @@
 (function () {
 
-    var displayName = document.querySelector('#display-name') || null;
-    var appUrl = window.location.origin + '/api/:id';
-           
     document.addEventListener("DOMContentLoaded", function(event) { 
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-                console.log(xmlhttp.response);
-                var userObject = JSON.parse(xmlhttp.response);
+        var displayName = document.querySelector('#display-name') || null;
+        var url = window.location.origin + '/api';
+        console.log(url);
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        xhr.onload = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                console.log(xhr.response);
+                var userObject = JSON.parse(xhr.response);
                 if (userObject.displayName !== null) {
                     displayName.innerHTML = userObject['displayName'];
                 }
+            } else {
+                console.error(xhr.response);
             }
-        };
-      xmlhttp.open('GET', appUrl, true);
-      xmlhttp.send();
+        }
+      xhr.send();
     });
     
 })();
