@@ -9,7 +9,6 @@
             if (xhr.readyState === 4 && xhr.status === 200) {
                 console.log("user controller response: " + xhr.response);
                 var userObject = JSON.parse(xhr.response);
-                console.log("after parsing: "+ userObject);
                 if (userObject.displayName !== null) {
                     displayName.innerHTML = userObject['displayName'];
                 }

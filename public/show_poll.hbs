@@ -74,7 +74,7 @@
         xhr.open('DELETE', deleteUrl, true);
         xhr.onload = function () {
           if (xhr.readyState === 4 && xhr.status === 200) {
-              console.log(xhr.response);
+              console.log("delete poll response: " + xhr.response);
           } else {
               console.error(xhr.response);
           }
