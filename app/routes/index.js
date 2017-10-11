@@ -90,9 +90,9 @@ module.exports = function (app, passport) {
 						  res.status(200).json({responseText: "Poll succesfully deleted!"});
 					    }
 				    });
-			  }
+				}
+			});
 		});
-	});
 	
 	app.route('/polls/:id/vote')
 		.post(function(req,res){
