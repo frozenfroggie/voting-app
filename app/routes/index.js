@@ -82,12 +82,12 @@ module.exports = function (app, passport) {
 			    if(err) {
 			      res.status(400).json({responseText: "server- Oops! Something went wrong."});
 			    } else {
-			    	console.log("data deleted: " + data);
+			    	console.log("Data deleted: " + data);
 			    	Polls.find({}, function(err, polls) {
 					    if(err) {
 					      res.status(400).json({responseText: "server- Oops! Something went wrong."});
 					    } else {
-						  res.status(200).json({responseText: "OK!"});
+						  res.status(200).json({responseText: "Poll succesfully deleted!"});
 					    }
 				    });
 			  }
