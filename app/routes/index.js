@@ -106,7 +106,7 @@ module.exports = function (app, passport) {
 		});
 		
 	app.route('/api')
-		.get(isLoggedIn, function (req, res) {
+		.get(function (req, res) {
 			res.json(req.user.github);
 		});
 
