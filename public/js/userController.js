@@ -16,13 +16,18 @@
                 console.error(xhr.response);
             }
         }
-      xhr.send();
+        xhr.send();
+    });
+
+})();
+
       
       /* why not work???
-     window.fetch(url)
+      
+    window.fetch(url)
         .then( res => res.json() )
         .then( userObject => userObject.displayName !== null ? displayName.innerHTML = userObject['displayName'] : "" );
     });
+    
     */ 
     
-})();
