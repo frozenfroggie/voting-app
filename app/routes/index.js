@@ -49,7 +49,7 @@ module.exports = function (app, passport) {
 												  .filter( (val, idx, arr) => arr.indexOf(val) === idx && val !== "" );
 			  let labels = {};
 			  labelsNames.forEach( labelName => labels[labelName] = 1 );
-			  const polls = new Polls({ 
+			  const polls = new Polls({
 			    title: req.body.title,
 			    labelsNames: labelsNames,
 			    labels: labels,

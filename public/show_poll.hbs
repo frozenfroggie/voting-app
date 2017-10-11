@@ -70,7 +70,6 @@
       var deleteUrl = location.origin + '/polls/' + '{{{id}}}' + '/delete';
       var redirectUrl = location.origin;
       function deletePoll() {
-        
         var xhr = new XMLHttpRequest();
         xhr.open('DELETE', deleteUrl, true);
         xhr.onload = function () {
