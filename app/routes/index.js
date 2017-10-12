@@ -48,7 +48,7 @@ module.exports = function (app, passport) {
 												  .slice(0,7)
 												  .filter( (val, idx, arr) => arr.indexOf(val) === idx && val !== "" );
 			  let labels = {};
-			  labelsNames.forEach( labelName => labels[labelName] = 1 );
+			  labelsNames.forEach( labelName => labels[labelName] = 0 );
 			  const polls = new Polls({
 			    title: req.body.title,
 			    labelsNames: labelsNames,
