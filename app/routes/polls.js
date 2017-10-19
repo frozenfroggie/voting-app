@@ -53,6 +53,7 @@ router.route('/:id')
     		 Polls.findByIdAndRemove(req.params.id, function(err, data) {
     		    	assert.equal(null, err);
     		    	console.log("Data deleted: " + data);
+    		    	res.redirect('/');
     		});
 	    });
 	

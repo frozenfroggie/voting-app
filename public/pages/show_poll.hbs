@@ -47,10 +47,12 @@
             {{/each}}
             </select>
             <input type="submit" value="Submit">
-            {{#if owner}}
-            <input type="button" value="Delete" onClick="deletePoll()">
-            {{/if}}
           </form>
+          {{#if owner}}
+          <form action="/polls/{{id}}/delete" method="delete">
+            <input type="button" value="Delete">
+          </form>
+          {{/if}}
           <div class="chartCont">
             <div id="chart"></div>
           </div>
