@@ -23,6 +23,7 @@ module.exports = function (app, passport) {
 		.get(isLoggedIn, function (req, res) {
 			Polls.find({}, function(err, polls) {
 				assert.equal(null, err);
+				console.log(typeof polls);
 				res.render(path + '/public/index.hbs', {polls: polls});
 			});
 		});
@@ -102,13 +103,9 @@ module.exports = function (app, passport) {
 			failureRedirect: '/login'
 		}));
 	
-	app.get("/getError", function(req,res,next) {
-		next("Yes an erro9r!!");
-	});
-	
-	app.use(errorHandler);
+	app.use(errorHandler); // Server errors
 
-	app.use(function(req, res) {
+	app.use(function(req, res) { // Client errors (not found)
 		res.sendStatus(404);
 	});
 	
