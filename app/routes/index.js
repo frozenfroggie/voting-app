@@ -10,7 +10,7 @@ module.exports = function (app, passport) {
 		if (req.isAuthenticated()) {
 			return next();
 		} else {
-			res.redirect('/login');
+			res.redirect('/');
 		}
 	}
 	
@@ -25,7 +25,7 @@ module.exports = function (app, passport) {
 		.get(isLoggedIn, function (req, res) {
 			Polls.find({}, function(err, polls) {
 				assert.equal(null, err);
-				res.render(path + '/public/index.hbs', {polls: polls});
+				res.render(path + '/public/pages/logged.hbs', {polls: polls});
 			});
 		});
 
@@ -33,7 +33,7 @@ module.exports = function (app, passport) {
 		.get(function (req, res) {
 			Polls.find({}, function(err, polls) {
 			    assert.equal(null, err);
-				res.render(path + '/public/login.hbs', {polls: polls});
+				res.render(path + '/public/index.hbs', {polls: polls});
 			});
 		});
 		

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>VoterR App</title>
+		<link href="/public/css/main.css" rel="stylesheet" type="text/css">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	</head>
+
+	<body>
+		<div class="container">
+			<nav>
+				<p class="welcomeUser"><span class="hideInMobile">You are logged in as </span><span id="display-name"></span></p>
+				<div class="loginCont">
+					<a class="menu" href="/polls/new">New Poll</a>
+					<p>|</p>
+					<a class="menu" href="/logout">Logout</a>
+				</div>
+			</nav>
+		
+			<main>
+				<header>
+					<h1><span class="voter">V</span>ote<span class="voter">R</span></h1>
+					<h2>Below are polls hosted by users.</h2>
+					<h2>Select a poll to see the results and vote, or make a new poll.</h2>
+				</header>
+				<article>
+				{{#each polls}}
+					<a href="/polls/{{this._id}}"><section>{{this.title}}</section></a>
+				{{/each}}
+				</article>
+			</main>
+		</div>
+		<script type="text/javascript" src="/public/js/userController.js"></script>
+		
+	</body>
+
+</html>

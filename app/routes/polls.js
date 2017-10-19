@@ -14,7 +14,7 @@ function isLoggedIn (req, res, next) {
 	
 router.route('/polls/new')
         .get(isLoggedIn, function (req, res) {
-			res.render(path + '/public/make_new_poll.hbs');
+			res.render(path + '/public/pages/make_new_poll.hbs');
 		})
 		.post(isLoggedIn, function(req, res) {
 			  const labelsNames = req.body.labels.split(/\r?\n/)
@@ -45,7 +45,7 @@ router.get('/polls/:id', function(req, res) {
 		Polls.findOne({_id: req.params.id}, function(err, poll) {
 				assert.equal(null, err);
 				var userID = req.user ? req.user.id : "";
-				res.render(path + '/public/show_poll.hbs', { owner: poll.owner == userID, logged: req.isAuthenticated(), labels: JSON.stringify(poll.labels), labelsNames: poll.labelsNames, title: poll.title.toUpperCase(), id: req.params.id });
+				res.render(path + '/public/pages/show_poll.hbs', { owner: poll.owner == userID, logged: req.isAuthenticated(), labels: JSON.stringify(poll.labels), labelsNames: poll.labelsNames, title: poll.title.toUpperCase(), id: req.params.id });
 		});
 	});
 	
