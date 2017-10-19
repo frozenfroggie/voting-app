@@ -102,10 +102,14 @@ module.exports = function (app, passport) {
 			failureRedirect: '/login'
 		}));
 	
-	app.get("getError", function(req,res,next) {
-		next("Yes an erro9r!!!");
+	app.get("/getError", function(req,res,next) {
+		next("Yes an erro9r!!");
 	});
 	
 	app.use(errorHandler);
+
+	app.use(function(req, res) {
+		res.sendStatus(404);
+	});
 	
 };
