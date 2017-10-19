@@ -2,7 +2,7 @@
 
     document.addEventListener("DOMContentLoaded", function(event) { 
         var displayName = document.querySelector('#display-name') || null;
-        var url = window.location.origin + '/api';
+        var url = window.location.origin + '/auth/github/api';
         var xhr = new XMLHttpRequest();
         xhr.open('GET', url, true);
         xhr.onload = function () {
