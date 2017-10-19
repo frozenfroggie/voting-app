@@ -40,21 +40,24 @@
   		<main class="voting">
   		  <h1>{{title}}</h1>
   		  <div class="display">
-    		    <div>
-              <form class="votingForm" action="/polls/{{id}}/vote" method="post">
-                <select name="label" required>
-                {{#each labelsNames}}
-                  <option value="{{this}}">{{this}}</option>
-                {{/each}}
-                </select>
-                <input type="submit" value="Submit">
-              </form>
-              {{#if owner}}
+          <form class="votingForm" action="/polls/{{id}}/vote" method="post">
+            <select name="label" required>
+            {{#each labelsNames}}
+              <option value="{{this}}">{{this}}</option>
+            {{/each}}
+            </select>
+            <input type="submit" value="Submit">
+            {{#if owner}}
+            <input type="button" value="Delete" id="delBtn">
+            {{/if}}
+          </form>
+          <!--
+            {{#if owner}}
               <form class="votingForm" action="/polls/{{id}}/del" method="get">
                 <input type="submit" value="Delete">
               </form>
-              {{/if}}
-            </div>
+            {{/if}}
+          -->
           <div class="chartCont">
             <div id="chart"></div>
           </div>
@@ -67,23 +70,27 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.9.1/d3.min.js"></script>
     <script>
       
-      /*
+      var deleteButton = document.getElementById("delBtn");
       var deleteUrl = location.origin + '/polls/' + '{{{id}}}';
       var redirectUrl = location.origin;
-      function deletePoll() {
-        var xhr = new XMLHttpRequest();
-        xhr.onload = function () {
-          if (xhr.readyState === 4 && xhr.status === 200) {
-              console.log("delete poll response: " + xhr.response);
-          } else {
-              console.error(xhr.response);
+        
+      deleteButton.addEventListener('click', function() {
+        
+        function deletePoll() {
+          var xhr = new XMLHttpRequest();
+          xhr.onload = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                console.log("delete poll response: " + xhr.response);
+            } else {
+                console.error(xhr.response);
+            }
+            window.location.replace(redirectUrl);
           }
-          window.location.replace(redirectUrl);
+          xhr.open('DELETE', deleteUrl, true);
+          xhr.send();
         }
-        xhr.open('DELETE', deleteUrl, true);
-        xhr.send();
-      }
-      */
+        
+      });
       
       (function(d3) {
         
