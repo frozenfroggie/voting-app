@@ -69,8 +69,7 @@ module.exports = function (app, passport) {
 					assert.equal(null, err);
 					var userID = req.user ? req.user.id : "";
 					res.render(path + '/public/show_poll.hbs', { owner: poll.owner == userID, logged: req.isAuthenticated(), labels: JSON.stringify(poll.labels), labelsNames: poll.labelsNames, title: poll.title.toUpperCase(), id: req.params.id });
-				}
-		  });
+			});
 		});
 		
 	app.route('/polls/:id/delete')
