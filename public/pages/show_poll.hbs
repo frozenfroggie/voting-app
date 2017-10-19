@@ -51,13 +51,6 @@
             <input type="button" value="Delete" id="delBtn">
             {{/if}}
           </form>
-          <!--
-            {{#if owner}}
-              <form class="votingForm" action="/polls/{{id}}/del" method="get">
-                <input type="submit" value="Delete">
-              </form>
-            {{/if}}
-          -->
           <div class="chartCont">
             <div id="chart"></div>
           </div>
@@ -73,8 +66,8 @@
       var deleteButton = document.getElementById("delBtn");
       var deleteUrl = location.origin + '/polls/' + '{{{id}}}';
       var redirectUrl = location.origin;
-        
       deleteButton.addEventListener('click', function() {
+        /*
           var xhr = new XMLHttpRequest();
           xhr.onload = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
@@ -86,6 +79,8 @@
           }
           xhr.open('DELETE', deleteUrl, true);
           xhr.send();
+          */
+          window.fetch(deleteUrl, {"method": "DELETE"}).then(response => response.json());
       });
       
       (function(d3) {
