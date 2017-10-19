@@ -12,7 +12,7 @@ function isLoggedIn (req, res, next) {
 	}
 }
 	
-router.route('/polls/new')
+router.route('/new')
         .get(isLoggedIn, function (req, res) {
 			res.render(path + '/public/pages/make_new_poll.hbs');
 		})
@@ -34,26 +34,26 @@ router.route('/polls/new')
 			  });
 		});
 		
-router.post('/polls/:id/vote', function(req,res){
+router.post('/:id/vote', function(req,res){
 		Polls.findByIdAndUpdate(req.params.id, {$inc: {[`labels.${req.body.label}`]: 1 }}, function(err, newData){
 		      assert.equal(null, err);
 		      res.redirect('/polls/' + req.params.id);
-		  });
-	});
-	
-router.get('/polls/:id', function(req, res) {
-		Polls.findOne({_id: req.params.id}, function(err, poll) {
-				assert.equal(null, err);
-				var userID = req.user ? req.user.id : "";
-				res.render(path + '/public/pages/show_poll.hbs', { owner: poll.owner == userID, logged: req.isAuthenticated(), labels: JSON.stringify(poll.labels), labelsNames: poll.labelsNames, title: poll.title.toUpperCase(), id: req.params.id });
 		});
-	});
+});
 	
-router.delete('/polls/:id/', isLoggedIn, function(req,res) {
-		 Polls.findByIdAndRemove(req.params.id, function(err, data) {
-		    	assert.equal(null, err);
-		    	console.log("Data deleted: " + data);
-		});
-	});
+router.route('/:id')
+        .get(function(req, res) {
+    		Polls.findOne({_id: req.params.id}, function(err, poll) {
+    				assert.equal(null, err);
+    				var userID = req.user ? req.user.id : "";
+    				res.render(path + '/public/pages/show_poll.hbs', { owner: poll.owner == userID, logged: req.isAuthenticated(), labels: JSON.stringify(poll.labels), labelsNames: poll.labelsNames, title: poll.title.toUpperCase(), id: req.params.id });
+    		});
+        })
+        .delete('/:id', isLoggedIn, function(req,res) {
+    		 Polls.findByIdAndRemove(req.params.id, function(err, data) {
+    		    	assert.equal(null, err);
+    		    	console.log("Data deleted: " + data);
+    		});
+	    });
 	
 module.exports = router;
