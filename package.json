@@ -13,6 +13,7 @@
   "author": "frozenfroggie",
   "license": "MIT",
   "dependencies": {
+    "assert": "^1.4.1",
     "body-parser": "^1.18.1",
     "cors": "^2.8.4",
     "d3": "^4.10.2",

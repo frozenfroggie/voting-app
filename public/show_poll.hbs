@@ -67,7 +67,6 @@
       var redirectUrl = location.origin;
       function deletePoll() {
         var xhr = new XMLHttpRequest();
-        xhr.open('DELETE', deleteUrl, true);
         xhr.onload = function () {
           if (xhr.readyState === 4 && xhr.status === 200) {
               console.log("delete poll response: " + xhr.response);
@@ -76,6 +75,7 @@
           }
           window.location.replace(redirectUrl);
         }
+        xhr.open('DELETE', deleteUrl, true);
         xhr.send();
       }
       
