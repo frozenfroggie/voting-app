@@ -75,8 +75,6 @@
       var redirectUrl = location.origin;
         
       deleteButton.addEventListener('click', function() {
-        
-        function deletePoll() {
           var xhr = new XMLHttpRequest();
           xhr.onload = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
@@ -88,8 +86,6 @@
           }
           xhr.open('DELETE', deleteUrl, true);
           xhr.send();
-        }
-        
       });
       
       (function(d3) {
