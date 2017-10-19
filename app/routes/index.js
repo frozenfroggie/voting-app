@@ -85,7 +85,6 @@ module.exports = function (app, passport) {
 			Polls.findByIdAndUpdate(req.params.id, {$inc: {[`labels.${req.body.label}`]: 1 }}, function(err, newData){
 			      assert.equal(null, err);
 			      res.redirect('/polls/' + req.params.id);
-			    }
 			  });
 		});
 		
