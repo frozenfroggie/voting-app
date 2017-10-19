@@ -66,8 +66,8 @@
       var deleteButton = document.getElementById("delBtn");
       var deleteUrl = location.origin + '/polls/' + '{{{id}}}';
       var redirectUrl = location.origin;
+      
       deleteButton.addEventListener('click', function() {
-        /*
           var xhr = new XMLHttpRequest();
           xhr.onload = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
@@ -79,13 +79,6 @@
           }
           xhr.open('DELETE', deleteUrl, true);
           xhr.send();
-          */
-
-          window.fetch(deleteUrl, {
-              method: 'delete'
-            })
-            .then(response => response.json());
-  
       });
       
       (function(d3) {
