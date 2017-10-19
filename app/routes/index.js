@@ -23,7 +23,6 @@ module.exports = function (app, passport) {
 		.get(isLoggedIn, function (req, res) {
 			Polls.find({}, function(err, polls) {
 				assert.equal(null, err);
-				console.log(typeof polls);
 				res.render(path + '/public/index.hbs', {polls: polls});
 			});
 		});
