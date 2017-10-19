@@ -1,6 +1,7 @@
 const path = process.cwd();
 const Polls = require('../models/polls.js');
 const assert = require('assert');
+const authorizationRoutes = require("./auth.js");
 
 module.exports = function (app, passport) {
 
@@ -41,9 +42,9 @@ module.exports = function (app, passport) {
 			res.redirect('/login');
 		});
 	
-	app.route('/new_poll')
+	app.route('/polls/new')
 		.get(isLoggedIn, function (req, res) {
-			res.render(path + '/public/new_poll.hbs');
+			res.render(path + '/public/make_new_poll.hbs');
 		})
 		.post(isLoggedIn, function(req, res) {
 			  const labelsNames = req.body.labels.split(/\r?\n/)
@@ -62,7 +63,15 @@ module.exports = function (app, passport) {
 			      res.redirect('/polls/' + data._id);
 			  });
 		});
-	
+		
+	app.route('/polls/:id/vote')
+		.post(function(req,res){
+			Polls.findByIdAndUpdate(req.params.id, {$inc: {[`labels.${req.body.label}`]: 1 }}, function(err, newData){
+			      assert.equal(null, err);
+			      res.redirect('/polls/' + req.params.id);
+			  });
+		});
+		
 	app.route('/polls/:id')
 		.get(function(req, res) {
 			Polls.findOne({_id: req.params.id}, function(err, poll) {
@@ -72,36 +81,16 @@ module.exports = function (app, passport) {
 			});
 		});
 		
-	app.route('/polls/:id/delete')
+	app.route('/polls/:id/')
 		.delete(isLoggedIn, function(req,res) {
 			 Polls.findByIdAndRemove(req.params.id, function(err, data) {
 			    	assert.equal(null, err);
 			    	console.log("Data deleted: " + data);
 			});
 		});
-	
-	app.route('/polls/:id/vote')
-		.post(function(req,res){
-			Polls.findByIdAndUpdate(req.params.id, {$inc: {[`labels.${req.body.label}`]: 1 }}, function(err, newData){
-			      assert.equal(null, err);
-			      res.redirect('/polls/' + req.params.id);
-			  });
-		});
+
+	app.use('/auth/github', authorizationRoutes);
 		
-	app.route('/api')
-		.get(function (req, res) {
-			res.json(req.user.github);
-		});
-
-	app.route('/auth/github')
-		.get(passport.authenticate('github'));
-
-	app.route('/auth/github/callback')
-		.get(passport.authenticate('github', {
-			successRedirect: '/',
-			failureRedirect: '/login'
-		}));
-	
 	app.use(errorHandler); // Server errors
 
 	app.use(function(req, res) { // Client errors (not found)
