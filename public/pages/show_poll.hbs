@@ -80,7 +80,7 @@
           xhr.open('DELETE', deleteUrl, true);
           xhr.send();
           */
-          window.fetch(deleteUrl, {"method": "DELETE"}).then(response => response.json());
+          window.fetch(deleteUrl, {method: 'delete'}).then(response => response.json());
       });
       
       (function(d3) {
