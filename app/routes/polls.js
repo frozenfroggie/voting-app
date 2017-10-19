@@ -49,7 +49,9 @@ router.route('/:id')
     				res.render(path + '/public/pages/show_poll.hbs', { owner: poll.owner == userID, logged: req.isAuthenticated(), labels: JSON.stringify(poll.labels), labelsNames: poll.labelsNames, title: poll.title.toUpperCase(), id: req.params.id });
     		});
         })
-        .post(isLoggedIn, function(req,res) {
+        
+router.route('/:id/del')
+        .get(isLoggedIn, function(req,res) {
     		 Polls.findByIdAndRemove(req.params.id, function(err, data) {
     		    	assert.equal(null, err);
     		    	console.log("Data deleted: " + data);
