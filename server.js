@@ -1,5 +1,6 @@
 'use strict';
 
+require('dotenv').config()
 var express = require('express');
 var routes = require('./app/routes/routes.js');
 var mongoose = require('mongoose');
